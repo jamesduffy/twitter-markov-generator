@@ -11,22 +11,26 @@ $app->get('/build/{username}', function($username) use ($app) {
 
     $statuses = $twitter->get('statuses/user_timeline', ['screen_name'=>$username, 'count'=>'200', 'exclude_replies'=>'true', 'include_rts'=>'false']);
 
-    $text_sample = '';
+    if ($twitter->lastHttpCode() == 200) {
+        $text_sample = '';
 
-    foreach ($statuses as $status) {
-        $text_sample .= $status->text.PHP_EOL;
+        foreach ($statuses as $status) {
+            $text_sample .= $status->text.PHP_EOL;
+        }
+
+        $chain = new MarkovPHP\WordChain($text_sample, 1);
+
+        $data = [
+                'image'         => $statuses['0']->user->profile_image_url,
+                'username'      => $statuses['0']->user->screen_name,
+                'name'          => $statuses['0']->user->name,
+                'random_tweet'  => $chain->generate(10)
+            ];
+
+        return $app->json($data);
+    } else {
+        return new Response('Error', 500 /* ignored */, array('X-Status-Code' => 500));
     }
-
-    $chain = new MarkovPHP\WordChain($text_sample, 1);
-
-    $data = [
-            'image'         => $statuses['0']->user->profile_image_url,
-            'username'      => $statuses['0']->user->screen_name,
-            'name'          => $statuses['0']->user->name,
-            'random_tweet'  => $chain->generate(10)
-        ];
-
-    return $app->json($data);
 });
 
 $app->get('/', function(){
