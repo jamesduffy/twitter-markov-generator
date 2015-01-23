@@ -11,7 +11,10 @@ $app->match('/install', function(){
 $app->get('/build/{username}', function($username) use ($app) {
     $twitter = new Abraham\TwitterOAuth\TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 
-    $statuses = $twitter->get('statuses/user_timeline', ['screen_name'=>$username, 'count'=>'200', 'exclude_replies'=>'true', 'include_rts'=>'false']);
+    $statuses_1 = $twitter->get('statuses/user_timeline', ['screen_name'=>$username, 'count'=>'200', 'exclude_replies'=>'true', 'include_rts'=>'false']);
+    $statuses_2 = $twitter->get('statuses/user_timeline', ['max_id'=>$statuses_1[(count($statuses_1)-1)]->id, 'screen_name'=>$username, 'count'=>'200', 'exclude_replies'=>'true', 'include_rts'=>'false']);
+
+    $statuses = array_merge($statuses_1, $statuses_2);
 
     if ($twitter->lastHttpCode() == 200) {
         $text_sample = '';
