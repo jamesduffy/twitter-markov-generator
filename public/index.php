@@ -9,16 +9,33 @@
 
 /*
 |--------------------------------------------------------------------------
-| Load the Autoloader
+| Register The Composer Auto Loader
 |--------------------------------------------------------------------------
 |
-| Let's start things up and load everything we need to start the
-| application running.
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
 |
 */
 
-require __DIR__.'/../app/bootstrap/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
+
+/*
+|--------------------------------------------------------------------------
+| Load Configuarion
+|--------------------------------------------------------------------------
+|
+| All the configuration values are saved in a config file. It simply holds
+| an array that is returned into the config variable.
+|
+*/
+
+$config = require __DIR__.'/../app/config.php'; 
+
+
+exit(OAUTH_CALLBACK);
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +47,8 @@ require __DIR__.'/../app/bootstrap/autoload.php';
 |
 */
 
-require __DIR__.'/../app/bootstrap/boot.php';
+$app = new Silex\Application();
+
+require __DIR__.'/../app/routes.php';
+
+$app->run();

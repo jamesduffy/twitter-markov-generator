@@ -1,30 +1,28 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Set the Routes
-|--------------------------------------------------------------------------
-|
-| Here we define all the routes the application's API will accept
-|
-*/
+$app['debug'] = true;
 
-$router->respond('/install', function($request){
+$app->match('/install', function(){
     return 'Install';
 });
 
-$router->with('/api', function () use ($router) {
+$app->get('/twitterauth', function() use ($app) {
+    $twitter = new Abraham\TwitterOAuth\TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 
-    $router->respond('GET', '/?', function ($request, $response) {
-        return 'this is the api';
-    });
+    $request_token = $twitter->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
 
-    $router->respond('GET', '/[:id]', function ($request, $response) {
-        // Show a single user
-    });
+    $_SESSION['oauth_token']        = $request_token['oauth_token'];
+    $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+
+    $url = $twitter->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
+
+    return $app->redirect($url);
+});
+
+$app->get('/twittercallback', function(){
 
 });
 
-$router->respond('GET', '/?', function ($request, $response, $service) {
-    $service->render(__DIR__.'/views/frontend.php');
+$app->get('/', function(){
+    return require __DIR__.'/views/frontend.php';
 });

@@ -5,6 +5,7 @@
         "klein/klein": "2.0.x",
         "abraham/twitteroauth": "0.4.1",
         "heidilabs/markov-php": "dev-master",
-        "illuminate/database": "4.2.16"
+        "illuminate/database": "4.2.16",
+        "silex/silex": "~1.2"
     }
 }
