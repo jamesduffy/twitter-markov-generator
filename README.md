@@ -1,6 +1,8 @@
 Twitter Markov Generator
 ======
 
+#Not completed yet
+
 This is a simple and fun tool for logging into your twitter account and building a markov chain.
 
 
