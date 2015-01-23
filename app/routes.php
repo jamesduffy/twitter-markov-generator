@@ -25,6 +25,6 @@ $router->with('/api', function () use ($router) {
 
 });
 
-$router->respond('GET', '/?', function ($service) {
+$router->respond('GET', '/?', function ($request, $response, $service) {
     $service->render(__DIR__.'/views/frontend.php');
 });
