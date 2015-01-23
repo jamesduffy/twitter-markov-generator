@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Response;
+
 $app['debug'] = true;
 
 $app->match('/install', function(){
