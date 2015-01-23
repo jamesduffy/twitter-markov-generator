@@ -30,7 +30,7 @@ $app->get('/build/{username}', function($username) use ($app) {
                 'image'         => $statuses['0']->user->profile_image_url,
                 'username'      => $statuses['0']->user->screen_name,
                 'name'          => $statuses['0']->user->name,
-                'random_tweet'  => $chain->generate(rand(3, 20))
+                'random_tweet'  => $chain->generate(rand(3, 10))
             ];
 
         return $app->json($data);
