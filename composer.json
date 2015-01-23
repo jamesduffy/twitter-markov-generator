@@ -2,10 +2,8 @@
     "name": "jamesduffy/twitter-markov-generator",
     "description": "This is a simple and fun tool for logging into your twitter account and building a markov chain.",
     "require": {
-        "klein/klein": "2.0.x",
         "abraham/twitteroauth": "0.4.1",
         "heidilabs/markov-php": "dev-master",
-        "illuminate/database": "4.2.16",
         "silex/silex": "~1.2"
     }
 }
