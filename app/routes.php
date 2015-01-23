@@ -17,8 +17,7 @@ $app->get('/build/{username}', function($username) use ($app) {
         $text_sample = '';
 
         foreach ($statuses as $status) {
-            $filtered_text = preg_replace('/https:\/\/t\.co\/[[:alnum:]]+/', '', $status->text);
-            $filtered_text = preg_replace('/http:\/\/t\.co\/[[:alnum:]]+/', '', $status->text);
+            $filtered_text = preg_replace('/https?:\/\/t\.co\/[[:alnum:]]+/', '', $status->text);
             $text_sample .= $filtered_text.PHP_EOL;
         }
 
