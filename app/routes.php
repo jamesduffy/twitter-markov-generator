@@ -24,7 +24,7 @@ $app->get('/build/{username}', function($username) use ($app) {
             $text_sample .= $filtered_text.PHP_EOL;
         }
 
-        $chain = new MarkovPHP\WordChain($text_sample, rand(1,3));
+        $chain = new MarkovPHP\WordChain($text_sample, 1);
 
         $data = [
                 'image'         => $statuses['0']->user->profile_image_url,
