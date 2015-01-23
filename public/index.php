@@ -35,8 +35,6 @@ require __DIR__.'/../vendor/autoload.php';
 $config = require __DIR__.'/../app/config.php'; 
 
 
-exit(OAUTH_CALLBACK);
-
 /*
 |--------------------------------------------------------------------------
 | Start the magic

@@ -8,6 +8,14 @@
     <title>Twitter Markov Generator</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style type="text/css">
+        .container {
+            max-width: 800px;
+        }
+        .jumbotron .container {
+            max-width: 800px;
+        }
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -35,7 +43,7 @@
 
         <div class="row text-center">
             <div class="col-lg-12">
-                <p>Made with <span class="glyphicon glyphicon-heart text-error" aria-hidden="true"></span> by <a href="https://cafeduff.com/">CafeDuff</a>.</p>
+                <p>Made by <a href="https://cafeduff.com/">CafeDuff</a>.</p>
             </div>
         </div>
 

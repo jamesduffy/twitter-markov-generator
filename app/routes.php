@@ -6,21 +6,28 @@ $app->match('/install', function(){
     return 'Install';
 });
 
-$app->get('/twitterauth', function() use ($app) {
+$app->get('/build/{username}', function($username) use ($app) {
     $twitter = new Abraham\TwitterOAuth\TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 
-    $request_token = $twitter->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
+    $statuses = $twitter->get('statuses/user_timeline', ['screen_name'=>$username, 'count'=>'200', 'exclude_replies'=>'true']);
 
-    $_SESSION['oauth_token']        = $request_token['oauth_token'];
-    $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+    $data['user'] = [
+            'profile-image' => $statuses['0']->user->profile_image_url,
+            'username' => $statuses['0']->user->screen_name,
+            'name' => $statuses['0']->user->name
+        ];
 
-    $url = $twitter->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
+    $text_sample = '';
 
-    return $app->redirect($url);
-});
+    foreach ($statuses as $status) {
+        $text_sample .= $status->text.' ';
+    }
 
-$app->get('/twittercallback', function(){
+    $chain = new MarkovPHP\WordChain($text_sample, 1);
 
+    $data['random_tweet'] = $chain->generate(6);;
+
+    return $app->json($data);
 });
 
 $app->get('/', function(){

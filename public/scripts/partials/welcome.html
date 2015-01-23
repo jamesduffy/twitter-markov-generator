@@ -1,23 +1,16 @@
 <div class="jumbotron">
     <div class="container">
         <h1 class="text-center">Twitter Markov Generator</h1>
-        <p class="text-center"><a class="btn btn-primary btn-lg" href="/twitterauth">Sign in with Twitter</a></p>
+        <p class="text-center">A Markov chain is a simple probability diagram. This application looks at your past tweets and trys to write a tweet that sounds like you. Sometimes it is pretty close and sometimes it doesn't make any sense, but that is the fun of it.</p>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-
-        </div>
-
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">What is this?</div>
-                <div class="panel-body">
-                    <p>A Markov chain is a simple probability diagram. This application looks at your past tweets and trys to write a tweet that sounds like you. Sometimes it is pretty close and sometimes it doesn't make any sense, but that is the fun of it.</p>
-                </div>
-            </div>            
+        <div class="col-sm-12">
+            <form ng-submit="submitToBuild()">
+                <input type="text" class="form-control input-lg" placeholder="Twitter username" ng-model="$scope.username">
+            </form>
         </div>
     </div>
 </div>
