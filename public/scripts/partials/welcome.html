@@ -9,8 +9,31 @@
     <div class="row">
         <div class="col-sm-12">
             <form ng-submit="submitToBuild()">
-                <input type="text" class="form-control input-lg" placeholder="Twitter username" ng-model="$scope.username">
+                <input type="text" class="form-control input-lg" placeholder="Twitter username" ng-model="username">
             </form>
         </div>
     </div>
+
+    <hr>
+
+    <div class="row" ng-if="isLoading">
+        <div class="col-sm-12">
+            <p class="text-center"><i class="fa fa-refresh fa-spin fa-4x"></i></p>
+        </div>
+    </div>
+
+    <ul class="media-list" ng-if="randomTweet">
+        <li class="media" ng-repeat="tweet in randomTweet">
+            <div class="media-left">
+                <img class="media-object" src="{{ tweet.image }}" alt="Image of the user">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    {{ tweet.username }}
+                    <small>{{ tweet.name }}</small>
+                </h4>
+                {{ tweet.random_tweet }}
+            </div>
+        </li>
+    </ul>
 </div>
