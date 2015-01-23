@@ -17,7 +17,9 @@ $app->get('/build/{username}', function($username) use ($app) {
         $text_sample = '';
 
         foreach ($statuses as $status) {
-            $text_sample .= $status->text.PHP_EOL;
+            $filtered_text = preg_replace('/https:\/\/t\.co\/[[:alnum:]]+/', '', $status->text);
+            $filtered_text = preg_replace('/http:\/\/t\.co\/[[:alnum:]]+/', '', $status->text);
+            $text_sample .= $filtered_text.PHP_EOL;
         }
 
         $chain = new MarkovPHP\WordChain($text_sample, 1);
