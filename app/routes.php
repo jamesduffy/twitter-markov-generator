@@ -31,7 +31,7 @@ $app->get('/build/{username}', function($username) use ($app) {
 
         return $app->json($data);
     } else {
-        return new Response('Error', 500 /* ignored */, array('X-Status-Code' => 500));
+        return new Response($statuses, 500 /* ignored */, array('X-Status-Code' => 500));
     }
 });
 
